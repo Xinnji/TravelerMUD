@@ -18,16 +18,19 @@ The skeleton for my very own Multi User Dimension.
 - [ ] A client connecting generates a new thread of the program, promps the user to log into a 
   character or create a new one with password, then logs them in with a player character.
 ### In-game features
-- [ ] go - move from one room to another connected one.
-- [ ] say - broadcast a message in your voice to everyone in the same room.
-- [ ] do - broadcast a message as an emote/action to everyone in the same room.
-- [ ] look - give the player the description of the thing they look at.
-- [ ] describe - change the long description of the player.
+#### Verbs
+- [ ] go - move from one room to another connected one
+- [ ] say - broadcast a message in your voice to everyone in the same room
+- [ ] do - broadcast a message as an emote/action to everyone in the same room
+- [ ] look - give the player the description of the thing they look at
+- [ ] describe - change the long description of the player
 - [ ] rename - change the short description of the player (from their own perspective).
-- [ ] recognize - identify a player as the argument.
+- [ ] recognize - identify a player as the argument
 - [ ] alias - add, remove, or give the player a list of their aliases. These are phrases that 
-  are replaced in parsing.
+  are replaced in parsing
 - [ ] god - create new game objects, including rooms, and edit their attributes. Essentially 
   edit the world file. Only available to ascendents.
 - [ ] cast - invoke certain special events, like teleport, finger of death, fly, or invisibility.
   Only available to wizards.
+#### Events
+- [ ] parse - player input event

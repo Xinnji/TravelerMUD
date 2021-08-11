@@ -1,0 +1,82 @@
+{
+    "entities": {},
+    "players": {},
+    "rooms": {
+        "Crossroads": {
+            "look": "Welcome to the crossroads, the place all travelers find themselves. Here, in the center of a clearing a camp fire crackles quietly. Next to the fire lies a fallen log. The dense, dark forest crowds in on all sides. Two well-trod foot paths intersect at the clearing, one leading through the forest north-south, the other east-west. The night sky is scattered with countles bright stars that twinkle, forming unknown constelations. The fire's warmth gives you comfort. Feel free to talk to the other travelers whom pass through while you are here.",
+            "size": -1,
+            "capacity": -1,
+            "exits": {
+                "north": "Windy Plain",
+                "east": "River",
+                "south": "Burning Place",
+                "west": "Cliff Bottom",
+                "up": "Sky"
+            },
+            "objects": {
+                "campfire": {
+                    "look": "A campfire, burning with a dancing light. Smoke drifts skyward. Occasionally, the fire will pop, throwing sparks high into the night sky.",
+                    "size": 3,
+                    "capacity": 0,
+                    "smell": "The fire gives off a fragrant smoke. You cannot quite place the scent."
+                }
+            },
+            "players": {}
+        },
+        "Windy Plain": {
+            "look": "This is the room to the north of the crossroads. It is bitingly cold here. The wind howls unceasingly across the wasted plane, tearing at your clothes.",
+            "size": -1,
+            "capacity": -1,
+            "exits": {
+                "south": "Crossroads"
+            },
+            "objects": {},
+            "players": {}
+        },
+        "River": {
+            "look": "This is the east room. A wide river can be seen here running north-south. Its waters are a deep blue.",
+            "size": -1,
+            "capacity": -1,
+            "exits": {
+                "west": "Crossroads"
+            },
+            "objects": {},
+            "players": {}
+        },
+        "Burning Place": {
+            "look": "This is the room to the south of the crossroads. It is scorching hot. Fires burn all around you. Sweat begins to bead on your forehead.",
+            "size": -1,
+            "capacity": -1,
+            "exits": {"north": "Crossroads"},
+            "objects": {},
+            "players": {}
+        },
+        "Cliff Bottom": {
+            "look": "This is the west room. Here, a rugged cliff rises suddenly from the ground to tower high above.",
+            "size": -1,
+            "capacity": -1,
+            "exits": {
+                "east": "Crossroads"
+            },
+            "objects": {
+                "cliff": {
+                    "look": "The cliff wall looms above, bare, weathered stone illuminated dully by sun. It looks like you might one day be able to climb this.",
+                    "size": 10000,
+                    "capacity": 0,
+                    "smell": "Why would you smell a cliff? Well, the stone smells dark and dusty."
+                }
+            },
+                "players": {}
+        },
+        "Sky": {
+            "look": "You weel freely through the air, high above the ground. Far below you see the smoke from the campfire in the crossroads.",
+            "size": -1,
+            "capacity": -1,
+            "exits": {
+                "down": "Crossroads"
+            },
+            "objects": {},
+            "players": {}
+        }
+    }
+}
