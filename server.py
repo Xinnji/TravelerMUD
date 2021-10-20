@@ -16,11 +16,12 @@ import events
 
 
 # Constants
-IP = socket.gethostbyname(socket.gethostname())
+# IP = socket.gethostbyname(socket.gethostname())
+IP = "localhost"
 PORT = 60420
 HEADER_LENGTH = 10
-FORMAT = 'utf-8'
-DISCONNECT_MSG = 'qq'
+FORMAT = "utf-8"
+DISCONNECT_MSG = "qq"
 
 
 # Functions
@@ -38,13 +39,13 @@ def send_message(sock, msg):
     message = msg.encode(FORMAT)
     msg_len = len(message)
     send_len = str(msg_len).encode(FORMAT)
-    send_len += b' ' * (HEADER_LENGTH - len(send_len))
+    send_len += b" " * (HEADER_LENGTH - len(send_len))
     sock.send(send_len)
     sock.send(message)
 
 
 def input_handler(sock, login):
-    """Handle receiving input: client -> server."""
+    """Handle receiving input: server <- client."""
     while sock:
         message = receive_message(sock)
         if message:
@@ -60,14 +61,13 @@ def output_handler(sock, login):
     newest_msg = 0
     while sock:
         if clients[login]:
-            for msg in clients[login].messages[newest_msg:len(clients[
-                                                                  login].messages)]:
+            for msg in clients[login].messages[newest_msg:len(clients[login].messages)]:
                 send_message(sock, msg)
                 newest_msg += 1
     sock.close()
 
 
-# Server
+# Server setup
 # Instantiate server sock
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Bind server sock to ip:port
@@ -75,47 +75,71 @@ server.bind((IP, PORT))
 # Server listens
 server.listen()
 # Server is now listening
-print(f'Listening on {IP}:{PORT}')
+print(f"Listening on {IP}:{PORT}")
+
 
 # Game world
 # File containing the starting world state
-worldfile = 'world.json'
+worldfile = "world.json"
 # Load the world into memory
 world = game.loadworld(worldfile)
 # Room players start in
 startroom = "Crossroads"
 
-# Client threading
+
+# Accept new clients
 clients = set()
-# Main thread: accept new clients
 while True:
     # Accept the connection, get client socket and ip address
     conn, addr = server.accept()
-    # First client input is login name (see client.py)
-    login = receive_message(conn)
+
+    # Client login
+    while True:
+        # Receive login from client
+        login = receive_message(conn)
+        if login:
+            # Send response to client
+            if filter(lambda p: p["login"] == login, world["players"]):
+                # If the character already exists, send good
+                send_message(conn, "good")
+                new_char = False
+            else:
+                # Otherwise a new character is to be created
+                send_message(conn, "bad")
+                new_char = True
+            # Receive password from client
+            passwd = receive_message(conn)
+            if passwd:
+                # Create new character if necessary
+                if new_char:
+                    world["players"].append(
+                        {
+                            "login": login,
+                            "passwd": passwd,
+                            "aliases": [],
+                            "inv": []
+                        }
+                    )
+                # Log in the player and send a response to the client
+                send_message(conn, "good")
+
     # Print connection to server
     print(login + " connected on " + addr)
     # Store new player in clients
     clients.add((login, conn, addr))
     # Notify players in the start room that a player connected
     for p in filter(lambda p: p["loc"] == startroom, world["players"]):
-        p["msgs"].append('A traveler appears.')
+        p["msgs"].append("A traveler appears.")
     world["rooms"][startroom]["inv"].append(clients[login])
-    clients[login]["msgs"].append(f'Welcome, {login}. Try typing help for a '
-                                  f'list of commands.')
-    # clients[login].look(None)
 
-    # Output thread: server sends output to clients
-    server_output = threading.Thread(
-        target=output_handler,
-        args=(conn, login)
-    )
-    server_output.start()
-
-    # Input thread: server receives input from clients
-    server_input = threading.Thread(
-        target=input_handler,
-        args=(conn, login)
-    )
+    # Server threading
+    # Input: server <- client
+    server_input = threading.Thread(target=input_handler,
+                                    args=(conn, login))
     server_input.start()
+
+    # Output: server -> client
+    server_output = threading.Thread(target=output_handler,
+                                     args=(conn, login))
+    server_output.start()
 
