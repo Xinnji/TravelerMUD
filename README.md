@@ -1,5 +1,5 @@
 # TravelerMUD
-The skeleton for my very own Multi User Dimension. This is an old version that I never finished. Rather than delete it permanently I decided to branch and leave it for posterity. The new and living branch is on main.
+The skeleton for my very own Multi User Dimension. As of 12/22/21, this is an old version that I never finished. Rather than delete it permanently I decided to branch and leave it for posterity. The new and living branch is on main.
 ## Files
 - server.py - start a process that accepts client connections and opens a world json file.
 - client.py - connect to a hosted server and take user input to direct player objects.
