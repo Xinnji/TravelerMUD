@@ -1,5 +1,5 @@
 # TravelerMUD
-The skeleton for my very own Multi User Dimension.
+The skeleton for my very own Multi User Dimension. This is an old version that I never finished. Rather than delete it permanently I decided to branch and leave it for posterity. The new and living branch is on main.
 ## Files
 - server.py - start a process that accepts client connections and opens a world json file.
 - client.py - connect to a hosted server and take user input to direct player objects.
@@ -7,7 +7,7 @@ The skeleton for my very own Multi User Dimension.
 - verbs.py - function definitions for in-game player commands.
 - events.py - function definitions for event functions (includes conditions, actor methods, etc.)
 ## Dev Tracker
-The game has undergone radical refactor and so does not currently exist. Dev tracker is for the new paradigm, which is WIP.
+The game has undergone radical refactor and so does not currently exist.
 ### Out-of-game skeleton
 - [ ] Static data for the world is stored in a database or JSON file format. This is just text 
   that needs to be 
