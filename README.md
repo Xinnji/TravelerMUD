@@ -76,4 +76,4 @@ affect. This only stores their login info and certain pieces of their
 character when offline, so they may pick up where they left off.
 
 ## Entity Relationship Diagram
-<img src="travelermud_erd.png" alt="Entity Relationship Diagram">
+<img src="travelermud_erd.png" alt="Entity Relationship Diagram" width=50%>
