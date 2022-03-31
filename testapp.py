@@ -37,12 +37,12 @@ for row in game.query('''select
     print(row[0], row[1], "from", row[2])
 
 # Fill Entity table with some example data
-game.query('''insert into Entity (name, desc) values ("Burning", "You are on Fire!", "burning 1");''')
+# game.query('''insert into Entity (name, desc) values ("Burning", "You are on Fire!", "burning 1");''')
 
 # Infinitely take user input to interact with the database easily
 while True:
     try:
-        query = input(f"\nquery {game.worldfile}:  ")
+        query = input(f"\nquery {game.db}:  ")
         if query == "stop":
             break
         cur = list(game.query(query))
